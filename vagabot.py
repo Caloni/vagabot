@@ -15,16 +15,21 @@ import xml.etree.ElementTree as ET
 import argparse
 
 update_id = None
+animation_url = "https://media.giphy.com/media/uDHN0n2COSUhdtwYvM/giphy.mp4"
 
 def message(update, context):
     msg = update.message.text
     if msg:
         msg = msg.lower()
-        filters = [ 'alguém sabe', 'alguém pode', 'alguém me', 'alguem sabe', 'alguem pode', 'alguem me' ]
-        for f in filters:
-            if msg.find(f) != -1 and len(msg) != len(f):
-                context.bot.send_animation(chat_id=update.effective_chat.id, animation="https://media.giphy.com/media/uDHN0n2COSUhdtwYvM/giphy.mp4", reply_to_message_id=update.message.message_id)
-                break
+        someone = [ 'alguém', 'alguem', 'someone' ]
+        can = [ 'sabe', 'pode', 'me', 'consegue', 'can' ]
+        for s in someone:
+            if msg.find(s) != -1:
+                for c in can:
+                    if msg.find(c) != -1:
+                        if len(msg) > (len(s) + len(c) + len(' ')):
+                            context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
+                            break
 
 def main():
 
