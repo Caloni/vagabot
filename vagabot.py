@@ -22,7 +22,7 @@ def message(update, context):
     if msg:
         msg = msg.lower()
         someone = [ 'alguém', 'alguem', 'someone' ]
-        can = [ 'sabe', 'pode', 'me', 'consegue', 'can' ]
+        can = [ 'sabe', 'pode', 'me', 'consegue', 'can', 'aqui', 'here', 'faz' ]
         for s in someone:
             if msg.find(s) != -1:
                 for c in can:
