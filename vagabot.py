@@ -5,6 +5,7 @@
 author Wanderley Caloni <wanderley.caloni@gmail.com>
 date 2020-11
 """
+import re
 import sys
 import logging
 import telegram.ext
@@ -21,15 +22,8 @@ def message(update, context):
     msg = update.message.text
     if msg:
         msg = msg.lower()
-        someone = [ 'alguém', 'alguem', 'someone' ]
-        can = [ 'sabe', 'pode', 'me', 'consegue', 'can', 'aqui', 'here', 'faz' ]
-        for s in someone:
-            if msg.find(s) != -1:
-                for c in can:
-                    if msg.find(c) != -1:
-                        if len(msg) > (len(s) + len(c) + len(' ')):
-                            context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
-                            break
+        if re.search("(alguem|alguém|someone|anybody|quem)(\s+)(sabe|me|aqui|here|faz|pode|consegue|can|could|sabe|tem).*\?", msg) != None:
+            context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
 
 def main():
 
