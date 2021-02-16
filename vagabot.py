@@ -19,11 +19,12 @@ update_id = None
 animation_url = "https://media.giphy.com/media/uDHN0n2COSUhdtwYvM/giphy.mp4"
 
 def message(update, context):
-    msg = update.message.text
-    if msg:
-        msg = msg.lower()
-        if re.search("(alguem|alguém|someone|anybody|quem)(\s+)(sabe|me|aqui|here|faz|pode|consegue|can|could|sabe|tem|explain|explica|help|ajuda|conhece|manja|que manje|que conheça|que conheca|knows|that knows|que saiba).*\?", msg) != None:
-            context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
+    if update.message:
+        msg = update.message.text
+        if msg:
+            msg = msg.lower()
+            if re.search("(alguem|alguém|someone|anybody|quem)(\s+)(sabe|me|aqui|here|faz|pode|consegue|can|could|sabe|tem|explain|explica|help|ajuda|conhece|manja|que manje|que conheça|que conheca|knows|that knows|que saiba).*\?", msg) != None:
+                context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
 
 def main():
 
