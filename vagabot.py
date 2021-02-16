@@ -14,6 +14,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 import xml.etree.ElementTree as ET
 import argparse
+import os
 
 update_id = None
 animation_url = "https://media.giphy.com/media/uDHN0n2COSUhdtwYvM/giphy.mp4"
@@ -23,7 +24,8 @@ def message(update, context):
         msg = update.message.text
         if msg:
             msg = msg.lower()
-            if re.search("(alguem|alguém|someone|anybody|quem)(\s+)(sabe|me|aqui|here|faz|pode|consegue|can|could|sabe|tem|explain|explica|help|ajuda|conhece|manja|que manje|que conheça|que conheca|knows|that knows|que saiba).*\?", msg) != None:
+            regex = os.environ["REGEX"] if "REGEX" in os.environ else "(alguem|alguém|someone|anybody|quem)(\s+)(sabe|me|aqui|here|faz|pode|consegue|can|could|sabe|tem|explain|explica|help|ajuda|conhece|manja|que manje|que conheça|que conheca|knows|that knows|que saiba).*\?"
+            if re.search(regex, msg) != None:
                 context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
 
 def main():
