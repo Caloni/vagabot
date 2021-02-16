@@ -25,7 +25,7 @@ def message(update, context):
         if msg:
             msg = msg.lower()
             regex = os.environ["REGEX"] if "REGEX" in os.environ else "(alguem|alguém|someone|anybody|quem)(\s+)(sabe|me|aqui|here|faz|pode|consegue|can|could|sabe|tem|explain|explica|help|ajuda|conhece|manja|que manje|que conheça|que conheca|knows|that knows|que saiba).*\?"
-            if re.search(regex, msg) != None:
+            if re.search(regex, msg, flags=re.MULTILINE | re.IGNORECASE) != None:
                 context.bot.send_animation(chat_id=update.effective_chat.id, animation=animation_url, reply_to_message_id=update.message.message_id)
 
 def main():
